@@ -1,0 +1,58 @@
+﻿@model ShopOnline.Models.Role;
+@{
+    ViewData["Title"] = "Sua quyen truy cap";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Sua quyen truy cap</h3>
+
+            <div class="card-tools">
+                <a href="#" class="btn btn-primary">Them moi</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <a>Sua quyen truy cap</a>
+            <div class="bs-stepper-content">
+                @using (Html.BeginForm("Edit", "AdminRoles", FormMethod.Post, new { }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(false)
+                    @Html.HiddenFor(model => model.RoleId)
+                    <!-- your steps content here -->
+                    <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Ten </label>
+                            @Html.TextBoxFor(x => x.RoleName, new { @class = "form-control", @placeholder = "Ten" })
+                            @Html.ValidationMessageFor(x => x.RoleName, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Mo ta</label>
+                            @Html.TextBoxFor(x => x.Description, new { @class = "form-control", @placeholder = "Mo ta" })
+                            @Html.ValidationMessageFor(x => x.Description, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
+
+                        <button class="btn btn-danger" onclick="stepper.previous()">Quay lai</button>
+                        <button type="submit" class="btn btn-primary">OK</button>
+                    </div>
+                }
+
+            </div>
+
+
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>
