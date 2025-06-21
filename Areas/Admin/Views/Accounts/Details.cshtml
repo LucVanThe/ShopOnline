@@ -1,0 +1,57 @@
+﻿@model ShopOnline.Models.Account
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow rounded">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Chi tiết tài khoản</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Số điện thoại</dt>
+                <dd class="col-sm-9">@Model.Phone</dd>
+
+                <dt class="col-sm-3">Email</dt>
+                <dd class="col-sm-9">@Model.Email</dd>
+
+                <dt class="col-sm-3">Mật khẩu</dt>
+                <dd class="col-sm-9 text-danger">@Model.Password</dd>
+
+                <dt class="col-sm-3">Salt</dt>
+                <dd class="col-sm-9 text-danger">@Model.Salt</dd>
+
+                <dt class="col-sm-3">Trạng thái</dt>
+                <dd class="col-sm-9">
+                    @if (Model.Active ==true)
+                    {
+                        <span class="badge bg-success">Hoạt động</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Bị khóa</span>
+                    }
+                </dd>
+
+                <dt class="col-sm-3">Họ tên</dt>
+                <dd class="col-sm-9">@Model.FullName</dd>
+
+                <dt class="col-sm-3">Lần đăng nhập gần nhất</dt>
+                <dd class="col-sm-9">@Model.LastLogin.("dd/MM/yyyy HH:mm")</dd>
+
+                <dt class="col-sm-3">Ngày tạo</dt>
+                <dd class="col-sm-9">@Model.CreateDate.("dd/MM/yyyy HH:mm")</dd>
+
+                <dt class="col-sm-3">Quyền</dt>
+                <dd class="col-sm-9">@Model.Role?.RoleName</dd> <!-- Hiển thị tên quyền nếu có -->
+            </dl>
+        </div>
+        <div class="card-footer text-end">
+            <a asp-action="Edit" asp-route-id="@Model.AccountId" class="btn btn-warning">Chỉnh sửa</a>
+            <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+        </div>
+    </div>
+</div>

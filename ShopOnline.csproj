@@ -24,7 +24,9 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="wwwroot\Images\Customers\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="wwwroot\Content\ckfinder\userfiles\" />
   </ItemGroup>
 
 </Project>

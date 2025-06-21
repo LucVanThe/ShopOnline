@@ -12,7 +12,7 @@
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-
+    
     <link rel="stylesheet" href="@Url.Content("~/Content/Admin/plugins/fontawesome-free/css/all.min.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/Admin/dist/css/adminlte.min.css")" />
 
@@ -201,7 +201,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="~/Content/Admin/index2.html" class="nav-link">
+                                    <a href="@Url.Action("Index", "AdminProducts", new { area = "Admin" })" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Sản phẩm</p>
                                     </a>
@@ -219,7 +219,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="@Url.Action("Index","AdminCustomers", new{area="Admin"})" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Quản lý khách hàng
@@ -233,49 +233,8 @@
                                         <p>Top Navigation</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="../layout/top-nav-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Top Navigation + Sidebar</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../layout/boxed.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Boxed</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../layout/fixed-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Fixed Sidebar</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../layout/fixed-sidebar-custom.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Fixed Sidebar <small>+ Custom Area</small></p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../layout/fixed-topnav.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Fixed Navbar</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../layout/fixed-footer.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Fixed Footer</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../layout/collapsed-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Collapsed Sidebar</p>
-                                    </a>
-                                </li>
                             </ul> *@
+                               
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -291,26 +250,8 @@
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>ChartJS</p>
                                     </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../charts/flot.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Flot</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../charts/inline.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Inline</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../charts/uplot.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>uPlot</p>
-                                    </a>
-                                </li>
-                            </ul> *@
+                                </li></ul>*@
+                               
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -326,50 +267,8 @@
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>General</p>
                                     </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../UI/icons.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Icons</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../UI/buttons.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Buttons</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../UI/sliders.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Sliders</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../UI/modals.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Modals & Alerts</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../UI/navbar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Navbar & Tabs</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../UI/timeline.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Timeline</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../UI/ribbons.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ribbons</p>
-                                    </a>
-                                </li>
-                            </ul> *@
+                                </li></ul>*@
+                               
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -378,14 +277,15 @@
                                     Quản lý hệ thống
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
-                            </a>
+                            </a >
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-area="Admin" asp-action="Index" asp-controller="AdminRoles" class="navs-link">
+                                    <a href="@Url.Action("Index","AdminRoles", new{area="Admin"})"  class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Quản lý quyền truy cập</p>
                                     </a>
                                 </li>
+                             
                                 <li class="nav-item">
                                     <a href="../forms/advanced.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
@@ -393,7 +293,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../forms/editors.html" class="nav-link">
+                                    <a href="@Url.Action("Index","Accounts", new{area="Admin"})" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Quản lý tài quản</p>
                                     </a>
@@ -457,7 +357,7 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            @RenderBody();
+            @RenderBody()
         </div>
 
         <!-- /.content-wrapper -->
@@ -475,6 +375,7 @@
         </aside>
         <!-- /.control-sidebar -->
     </div>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- ./wrapper -->
     <!-- jQuery -->
     <script src="~/Content/Admin/plugins/jquery/jquery.min.js"></script>

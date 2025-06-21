@@ -1,0 +1,130 @@
+﻿@model ShopOnline.Models.Product
+
+@{
+    ViewData["Title"] = "Thêm sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h1 class="mb-4">Thêm mới sản phẩm</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Create" class="border rounded p-4 shadow-sm bg-light">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="ProductName" class="form-label"></label>
+                <input asp-for="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ShortDesc" class="form-label"></label>
+                <input asp-for="ShortDesc" class="form-control" />
+                <span asp-validation-for="ShortDesc" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="form-group mb-3">
+                    <label asp-for="CatId" class="form-label"></label>
+                    <select asp-for="CatId" class="form-control" asp-items="ViewBag.CatId">
+                        <option value="">-- Danh mục --</option>
+                    </select>
+                    <span asp-validation-for="CatId" class="text-danger small"></span>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label asp-for="Price" class="form-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label asp-for="Discount" class="form-label"></label>
+                    <input asp-for="Discount" class="form-control" />
+                    <span asp-validation-for="Discount" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Thumb" class="form-label"></label>
+                <input asp-for="Thumb" class="form-control" />
+                <span asp-validation-for="Thumb" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Video" class="form-label"></label>
+                <input asp-for="Video" class="form-control" />
+                <span asp-validation-for="Video" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="DateCreated" class="form-label"></label>
+                    <input asp-for="DateCreated" class="form-control" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="DateModified" class="form-label"></label>
+                    <input asp-for="DateModified" class="form-control" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label asp-for="BestSellers" class="form-label"></label>
+                    <input asp-for="BestSellers" class="form-control" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="HomeFlag" class="form-label"></label>
+                    <input asp-for="HomeFlag" class="form-control" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="Active" class="form-label"></label>
+                    <input asp-for="Active" class="form-control" />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Tags" class="form-label"></label>
+                <input asp-for="Tags" class="form-control" />
+                <span asp-validation-for="Tags" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Alias" class="form-label"></label>
+                    <input asp-for="Alias" class="form-control" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Uninstock" class="form-label"></label>
+                    <input asp-for="Uninstock" class="form-control" />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MetaDesc" class="form-label"></label>
+                <input asp-for="MetaDesc" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MetaKey" class="form-label"></label>
+                <input asp-for="MetaKey" class="form-control" />
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+                <input type="submit" value="Tạo sản phẩm" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
