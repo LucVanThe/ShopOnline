@@ -13013,6 +13013,26 @@
       "PackagePath": "staticwebassets\\Content\\ckfinder\\translations.txt"
     },
     {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Category\\0x72_16x16RobotTileset.v1_638861812784958110.png",
+      "PackagePath": "staticwebassets\\Images\\Category\\0x72_16x16RobotTileset.v1_638861812784958110.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Category\\0x72_16x16RobotTileset.v1_638861813871844476.png",
+      "PackagePath": "staticwebassets\\Images\\Category\\0x72_16x16RobotTileset.v1_638861813871844476.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Category\\0x72_16x16RobotTileset.v1_638861816650521819.png",
+      "PackagePath": "staticwebassets\\Images\\Category\\0x72_16x16RobotTileset.v1_638861816650521819.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Category\\anyrgb.com_638861821907229960.png",
+      "PackagePath": "staticwebassets\\Images\\Category\\anyrgb.com_638861821907229960.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Category\\image-22_638861813715512829.png",
+      "PackagePath": "staticwebassets\\Images\\Category\\image-22_638861813715512829.png"
+    },
+    {
       "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Customers\\0x72_16x16RobotTileset.v1_638861238130982955.png",
       "PackagePath": "staticwebassets\\Images\\Customers\\0x72_16x16RobotTileset.v1_638861238130982955.png"
     },
@@ -13055,6 +13075,114 @@
     {
       "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Customers\\image-22_638861230405941243.png",
       "PackagePath": "staticwebassets\\Images\\Customers\\image-22_638861230405941243.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Pages\\0x72_16x16RobotTileset.v1_638862022563795711.png",
+      "PackagePath": "staticwebassets\\Images\\Pages\\0x72_16x16RobotTileset.v1_638862022563795711.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Pages\\0x72_16x16RobotTileset.v1_638862031516469743.png",
+      "PackagePath": "staticwebassets\\Images\\Pages\\0x72_16x16RobotTileset.v1_638862031516469743.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Pages\\0x72_16x16RobotTileset.v1_638862065304356699.png",
+      "PackagePath": "staticwebassets\\Images\\Pages\\0x72_16x16RobotTileset.v1_638862065304356699.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Pages\\1_638862032424448520.png",
+      "PackagePath": "staticwebassets\\Images\\Pages\\1_638862032424448520.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Pages\\Arcade - RoboCop - Stage 5 Boss_638862023790081756.png",
+      "PackagePath": "staticwebassets\\Images\\Pages\\Arcade - RoboCop - Stage 5 Boss_638862023790081756.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Pages\\Arcade - RoboCop - Stage 5 Boss_638862024894636337.png",
+      "PackagePath": "staticwebassets\\Images\\Pages\\Arcade - RoboCop - Stage 5 Boss_638862024894636337.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Pages\\Arcade - RoboCop - Stage 5 Boss_638862030134498403.png",
+      "PackagePath": "staticwebassets\\Images\\Pages\\Arcade - RoboCop - Stage 5 Boss_638862030134498403.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Pages\\New Piskel-2.png_638862032678142313.png",
+      "PackagePath": "staticwebassets\\Images\\Pages\\New Piskel-2.png_638862032678142313.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Pages\\WCP_1_638862031839793068.png",
+      "PackagePath": "staticwebassets\\Images\\Pages\\WCP_1_638862031839793068.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Pages\\anyrgb.com_638862025105352543.png",
+      "PackagePath": "staticwebassets\\Images\\Pages\\anyrgb.com_638862025105352543.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Pages\\anyrgb.com_638862028936213208.png",
+      "PackagePath": "staticwebassets\\Images\\Pages\\anyrgb.com_638862028936213208.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Pages\\anyrgb.com_638862029967811850.png",
+      "PackagePath": "staticwebassets\\Images\\Pages\\anyrgb.com_638862029967811850.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Pages\\anyrgb.com_638862030531428502.png",
+      "PackagePath": "staticwebassets\\Images\\Pages\\anyrgb.com_638862030531428502.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Pages\\helicopter_638862087784731769.png",
+      "PackagePath": "staticwebassets\\Images\\Pages\\helicopter_638862087784731769.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Pages\\image-22_638862031655561868.png",
+      "PackagePath": "staticwebassets\\Images\\Pages\\image-22_638862031655561868.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Pages\\image-22_638862092470132161.png",
+      "PackagePath": "staticwebassets\\Images\\Pages\\image-22_638862092470132161.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Products\\0x72_16x16RobotTileset.v1_638861846701595476.png",
+      "PackagePath": "staticwebassets\\Images\\Products\\0x72_16x16RobotTileset.v1_638861846701595476.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Products\\Arcade - RoboCop - Stage 5 Boss_638861832845476265.png",
+      "PackagePath": "staticwebassets\\Images\\Products\\Arcade - RoboCop - Stage 5 Boss_638861832845476265.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Products\\Arcade - RoboCop - Stage 5 Boss_638861832845476275.png",
+      "PackagePath": "staticwebassets\\Images\\Products\\Arcade - RoboCop - Stage 5 Boss_638861832845476275.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Products\\Arcade - RoboCop - Stage 5 Boss_638861842968771992.png",
+      "PackagePath": "staticwebassets\\Images\\Products\\Arcade - RoboCop - Stage 5 Boss_638861842968771992.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Products\\Arcade - RoboCop - Stage 5 Boss_638861846224940684.png",
+      "PackagePath": "staticwebassets\\Images\\Products\\Arcade - RoboCop - Stage 5 Boss_638861846224940684.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Products\\Arcade - RoboCop - Stage 5 Boss_638862093456748187.png",
+      "PackagePath": "staticwebassets\\Images\\Products\\Arcade - RoboCop - Stage 5 Boss_638862093456748187.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Products\\anyrgb.com_638861846102680727.png",
+      "PackagePath": "staticwebassets\\Images\\Products\\anyrgb.com_638861846102680727.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Products\\anyrgb.com_638862093647699797.png",
+      "PackagePath": "staticwebassets\\Images\\Products\\anyrgb.com_638862093647699797.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Products\\anyrgb.com_638862095390951980.png",
+      "PackagePath": "staticwebassets\\Images\\Products\\anyrgb.com_638862095390951980.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Products\\image-22_638861843683009298.png",
+      "PackagePath": "staticwebassets\\Images\\Products\\image-22_638861843683009298.png"
+    },
+    {
+      "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\Images\\Products\\vector-pixel-art-tank-war-set-2BXG9HN_638862094670856048.jpg",
+      "PackagePath": "staticwebassets\\Images\\Products\\vector-pixel-art-tank-war-set-2BXG9HN_638862094670856048.jpg"
     },
     {
       "Id": "C:\\Users\\01672\\source\\repos\\ShopOnline\\ShopOnline\\wwwroot\\css\\site.css",

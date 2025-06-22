@@ -12,6 +12,16 @@
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Content/Admin/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/Admin/dist/css/adminlte.min.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/Content/Admin/plugins/summernote/summernote-bs4.min.css">
+    <!-- CodeMirror -->
+    <link rel="stylesheet" href="~/Content/Admin/plugins/codemirror/codemirror.css">
+    <link rel="stylesheet" href="~/Content/Admin/plugins/codemirror/theme/monokai.css">
+    <!-- SimpleMDE -->
+    <link rel="stylesheet" href="~/Content/Admin/plugins/simplemde/simplemde.min.css">
     
     <link rel="stylesheet" href="@Url.Content("~/Content/Admin/plugins/fontawesome-free/css/all.min.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/Admin/dist/css/adminlte.min.css")" />
@@ -195,7 +205,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Category", new { area = "Admin" })" class="nav-link">
+                                    <a href="@Url.Action("Index", "AdminCategories", new { area = "Admin" })" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Danh mục</p>
                                     </a>
@@ -214,7 +224,7 @@
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Quản lý đơn hàng
-                                    <i class="right fas fa-angle-left"></i>
+                                    
                                 </p>
                             </a>
                         </li>
@@ -223,7 +233,7 @@
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Quản lý khách hàng
-                                    <i class="right fas fa-angle-left"></i>
+                                   
                                 </p>
                             </a>
                             @*  <ul class="nav nav-treeview">
@@ -241,7 +251,7 @@
                                 <i class="nav-icon fas fa-chart-pie"></i>
                                 <p>
                                     Doanh số
-                                    <i class="right fas fa-angle-left"></i>
+                                    
                                 </p>
                             </a>
                             @*    <ul class="nav nav-treeview">
@@ -253,14 +263,14 @@
                                 </li></ul>*@
                                
                         </li>
-                        <li class="nav-item">
+                        @* <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tree"></i>
                                 <p>
                                     Quản lý tin tức
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
-                            </a>
+                            </a> *@
                             @*   <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="../UI/general.html" class="nav-link">
@@ -309,11 +319,11 @@
                             </ul> *@
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="@Url.Action("Index","AdminPages", new{area="Admin"})" class="nav-link">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
-                                    Quản lý pages
-                                    <i class="fas fa-angle-left right"></i>
+                                    Quản lý tin tức
+                                    
                                 </p>
                             </a>
                             @*   <ul class="nav nav-treeview">
@@ -343,7 +353,7 @@
                                 <i class="nav-icon far fa-calendar-alt"></i>
                                 <p>
                                     Quản lý shipper
-                                    <span class="badge badge-info right">2</span>
+                                    <span class="badge badge-info right">0</span>
                                 </p>
                             </a>
                         </li>
@@ -383,8 +393,16 @@
     <script src="~/Content/Admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/Content/Admin/dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="~/Content/Admin/dist/js/demo.js"></script>
+    <!-- Summernote -->
+    <script src="~/Content/Admin/summernote/summernote-bs4.min.js"></script>
+    <!-- CodeMirror -->
+    <script src="~/Content/Admin/codemirror/codemirror.js"></script>
+    <script src="~/Content/Admin/codemirror/mode/css/css.js"></script>
+    <script src="~/Content/Admin/codemirror/mode/xml/xml.js"></script>
+    <script src="~/Content/Admin/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="~/Content/ckfinder/ckfinder.js"></script>
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+   
     @RenderSection("script", required: false)
 </body>
 </html>

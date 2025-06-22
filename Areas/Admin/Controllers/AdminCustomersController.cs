@@ -23,7 +23,7 @@ namespace ShopOnline.Areas.Admin.Controllers
         public IActionResult Index(int? page)
         {
             var pageNumber = page == null|| page <= 0 ? 1 : page.Value;
-            var pageSize = 15; // Số lượng bản ghi trên mỗi trang
+            var pageSize = 15;
             var customers = _context.Customers
                 .OrderByDescending(c => c.CreateDate);
                
@@ -80,6 +80,7 @@ namespace ShopOnline.Areas.Admin.Controllers
                     customer.Avatar = newFileName;
                     
                 }
+               
                 customer.CreateDate = DateTime.Now;
                 _context.Add(customer);
                 _context.SaveChangesAsync();
@@ -179,6 +180,14 @@ namespace ShopOnline.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var customer = await _context.Customers.FindAsync(id);
+            if (!string.IsNullOrEmpty(customer.Avatar))
+            {
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Customers", customer.Avatar);
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+            }
             if (customer != null)
             {
                 _context.Customers.Remove(customer);

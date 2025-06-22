@@ -1,0 +1,60 @@
+﻿@model ShopOnline.Models.Category
+
+@{
+    ViewData["Title"] = "Chi tiết danh mục";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h2 class="mb-4">Chi tiết danh mục</h2>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Tên danh mục</dt>
+            <dd class="col-sm-9">@Model.CatName</dd>
+
+            <dt class="col-sm-3">Mô tả</dt>
+            <dd class="col-sm-9">@Model.Description</dd>
+
+            <dt class="col-sm-3">ID Danh mục cha</dt>
+            <dd class="col-sm-9">@Model.ParentId</dd>
+
+            <dt class="col-sm-3">Cấp bậc (Level)</dt>
+            <dd class="col-sm-9">@Model.Levels</dd>
+
+            <dt class="col-sm-3">Thứ tự hiển thị</dt>
+            <dd class="col-sm-9">@Model.Ordering</dd>
+
+            <dt class="col-sm-3">Hiển thị</dt>
+            <dd class="col-sm-9">@Model.Published</dd>
+
+            <dt class="col-sm-3">Ảnh đại diện</dt>
+            <dd class="col-sm-9">
+                <img src="~/Images/Category/@Model.Thumb" class="img-thumbnail" width="150" alt="Ảnh đại diện" />
+            </dd>
+
+            <dt class="col-sm-3">Tiêu đề SEO</dt>
+            <dd class="col-sm-9">@Model.Title</dd>
+
+            <dt class="col-sm-3">Alias</dt>
+            <dd class="col-sm-9">@Model.Alias</dd>
+
+            <dt class="col-sm-3">Mô tả Meta</dt>
+            <dd class="col-sm-9">@Model.MetaDesc</dd>
+
+            <dt class="col-sm-3">Từ khóa Meta</dt>
+            <dd class="col-sm-9">@Model.MetaKey</dd>
+
+            <dt class="col-sm-3">Cover</dt>
+            <dd class="col-sm-9">@Model.Cover</dd>
+
+            <dt class="col-sm-3">Schema Markup</dt>
+            <dd class="col-sm-9"><pre class="bg-light p-2 rounded">@Model.SchemaMarkup</pre></dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-4 d-flex justify-content-between">
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+    <a asp-action="Edit" asp-route-id="@Model.CatId" class="btn btn-primary">Chỉnh sửa</a>
+</div>

@@ -43,7 +43,7 @@ public partial class Product
 
     public string? MetaKey { get; set; }
 
-    public bool? Uninstock { get; set; }
+    public int? UnitInStock { get; set; }
 
     public virtual ICollection<AttributesPrice> AttributesPrices { get; set; } = new List<AttributesPrice>();
 

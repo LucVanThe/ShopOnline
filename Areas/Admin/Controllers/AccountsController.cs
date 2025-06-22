@@ -67,6 +67,8 @@ namespace ShopOnline.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                account.CreateDate = DateTime.Now;
+                
                 _context.Add(account);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

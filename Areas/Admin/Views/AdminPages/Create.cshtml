@@ -1,0 +1,110 @@
+﻿@model ShopOnline.Models.Page
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h1>Tạo mới</h1>
+
+
+<hr />
+<div class="container mt-4">
+    <div class="card shadow-sm rounded">
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0">Thêm mới Page</h5>
+        </div>
+        <div class="card-body">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PageName" class="control-label"></label>
+                <input asp-for="PageName" class="form-control" />
+                <span asp-validation-for="PageName" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                 <label for="exampleInputEmail1">Nội dung</label>
+                 @Html.TextAreaFor(x => x.Contents, new { @class = "form-control", @placeholder = "Nội dung", @id = "txtDetail" })
+                 @Html.ValidationMessageFor(x => x.Contents, null, new { @class = "text-danger" })
+             </div>
+
+            <div class="form-group mb-3">
+                    <label asp-for="Thumb" class="form-label">Ảnh đại diện</label>
+                    <input type="file" name="Avatar" class="form-control" accept="image/*" />
+                    <img id="previewAvatar" class="img-thumbnail mt-2" style="display:none;" width="100" />
+            </div> 
+               
+
+
+            <div class="form-group">
+                <label asp-for="Publish" class="control-label">Công khai</label>
+                @Html.DropDownListFor(model => model.Publish,
+                         new List<SelectListItem>
+                {
+                new SelectListItem { Text = "Hoạt động", Value = "true" },
+                new SelectListItem { Text = "Bị khóa", Value = "false" }
+                },
+                         htmlAttributes: new { @class = "form-control" })
+                <span asp-validation-for="Publish" class="text-danger small"></span>
+            </div>
+        
+          
+               
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MetaDesc" class="control-label"></label>
+                <input asp-for="MetaDesc" class="form-control" />
+                <span asp-validation-for="MetaDesc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MetaKey" class="control-label"></label>
+                <input asp-for="MetaKey" class="form-control" />
+                <span asp-validation-for="MetaKey" class="text-danger"></span>
+            </div>
+          
+          
+            <div class="form-group">
+                <label asp-for="Ordering" class="control-label"></label>
+                <input asp-for="Ordering" class="form-control" />
+                <span asp-validation-for="Ordering" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Tạo" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+@section script {
+    <script>
+        document.querySelector('input[type="file"][name="Avatar"]').addEventListener('change', function (e) {
+            const [file] = e.target.files;
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const preview = document.getElementById("previewAvatar");
+                    preview.src = e.target.result;
+                    preview.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+		$(document).ready(function () {
+			CKEDITOR.replace('txtDetail', {
+				customConfig: '/content/ckeditor/config.js',
+				extraAllowedContent: 'span',
+			});
+		});
+       
+    </script>
+}
+

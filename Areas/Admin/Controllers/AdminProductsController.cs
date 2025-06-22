@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShopOnline.Models;
+using X.PagedList;
 
 namespace ShopOnline.Areas.Admin.Controllers
 {
@@ -20,10 +21,19 @@ namespace ShopOnline.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminProducts
-        public async Task<IActionResult> Index()
+        public IActionResult Index(string searchString, int? page)
         {
-            var webBanhangDbContext = _context.Products.Include(p => p.Cat);
-            return View(await webBanhangDbContext.ToListAsync());
+            var product = _context.Products.Include(a => a.Cat).AsQueryable();
+            ViewBag.CurrentFilter = searchString;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                product = product.Where(a => a.ProductName.Contains(searchString) );
+            }
+            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+            var pageSize = 15; // Số lượng bản ghi trên mỗi trang
+            PagedList<Product> pagedProducts = new PagedList<Product>(product, pageNumber, pageSize);
+            ViewBag.CurrentPage = pageNumber;
+            return View(pagedProducts);
         }
 
         // GET: Admin/AdminProducts/Details/5
@@ -57,10 +67,29 @@ namespace ShopOnline.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( Product product)
+        public async Task<IActionResult> Create( Product product, IFormFile Avatar)
         {
             if (ModelState.IsValid)
             {
+                if (Avatar != null && Avatar.Length > 0)
+                {
+                    var fileName = Path.GetFileNameWithoutExtension(Avatar.FileName);
+                    var extension = Path.GetExtension(Avatar.FileName);
+                    string newFileName = $"{fileName}_{DateTime.Now.Ticks}{extension}";
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Products", newFileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                       await Avatar.CopyToAsync(stream);
+                    }
+
+                    product.Thumb = newFileName;
+
+                }
+              
+                product.Alias = Helper.Utilities.GenerateAlias(product.ProductName);
+                product.DateCreated = DateTime.Now;
+                product.DateModified = DateTime.Now;
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -82,7 +111,7 @@ namespace ShopOnline.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["CatId"] = new SelectList(_context.Categories, "CatId", "CatId", product.CatId);
+            ViewBag.CatId = new SelectList(_context.Categories.ToList(), "CatId", "CatName");
             return View(product);
         }
 
@@ -91,10 +120,11 @@ namespace ShopOnline.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,ProductName,ShortDesc,Description,CatId,Price,Discount,Thumb,Video,DateCreated,DateModified,BestSellers,HomeFlag,Active,Tags,Title,Alias,MetaDesc,MetaKey,Uninstock")] Product product)
+        public async Task<IActionResult> Edit(int id,  Product product, IFormFile Avatar)
         {
             if (id != product.ProductId)
             {
+
                 return NotFound();
             }
 
@@ -102,6 +132,23 @@ namespace ShopOnline.Areas.Admin.Controllers
             {
                 try
                 {
+                    if (Avatar != null && Avatar.Length > 0)
+                    {
+                        var fileName = Path.GetFileNameWithoutExtension(Avatar.FileName);
+                        var extension = Path.GetExtension(Avatar.FileName);
+                        string newFileName = $"{fileName}_{DateTime.Now.Ticks}{extension}";
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Products", newFileName);
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await Avatar.CopyToAsync(stream);
+                        }
+
+                        product.Thumb = newFileName;
+
+                    }
+                   product.Alias = Helper.Utilities.GenerateAlias(product.ProductName);
+                    product.DateModified = DateTime.Now;
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
@@ -118,42 +165,50 @@ namespace ShopOnline.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CatId"] = new SelectList(_context.Categories, "CatId", "CatId", product.CatId);
+            ViewBag.CatId = new SelectList(_context.Categories, "CatId", "CatName", product.CatId);
             return View(product);
         }
 
         // GET: Admin/AdminProducts/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var product = await _context.Products
-                .Include(p => p.Cat)
-                .FirstOrDefaultAsync(m => m.ProductId == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
+        //    var product = await _context.Products
+        //        .Include(p => p.Cat)
+        //        .FirstOrDefaultAsync(m => m.ProductId == id);
+        //    if (product == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(product);
-        }
+        //    return View(product);
+        //}
 
         // POST: Admin/AdminProducts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost]
+       
+        public IActionResult Delete(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var product =  _context.Products.Find(id);
+            if (!string.IsNullOrEmpty(product.Thumb))
+            {
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Products", product.Thumb);
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+            }
             if (product != null)
             {
                 _context.Products.Remove(product);
             }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+           
+            _context.SaveChanges();
+            return Json(new { success = true, message = "Xóa thành công" });
         }
 
         private bool ProductExists(int id)

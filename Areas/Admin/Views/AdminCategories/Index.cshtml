@@ -1,0 +1,82 @@
+﻿@model IEnumerable<ShopOnline.Models.Category>
+
+@{
+    ViewData["Title"] = "Quản lý danh mục";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h2 class="mb-4">Danh sách danh mục</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-success mb-3">
+        <i class="fa fa-plus"></i> Thêm mới
+    </a>
+</p>
+
+<table class="table table-bordered table-striped align-middle shadow-sm">
+    <thead class="thead-dark">
+        <tr>
+            <th>Tên danh mục</th>
+            <th>Mô tả</th>
+            <th>Cấp bậc</th>
+            <th>Ảnh</th>
+            <th>Tiêu đề</th>
+            <th>Alias</th>
+            <th class="text-center">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="row_@item.CatId">
+                <td>@item.CatName</td>
+                <td>@item.Description</td>
+                <td>@item.Levels</td>
+                <td>
+                    <img src="~/Images/Category/@item.Thumb" alt="Ảnh" class="img-thumbnail" width="60" height="60" />
+                </td>
+                <td>@item.Title</td>
+                <td>@item.Alias</td>
+                <td class="text-center">
+                    <a asp-action="Edit" asp-route-id="@item.CatId" class="btn btn-sm btn-primary me-1">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item.CatId" class="btn btn-sm btn-info me-1">
+                        <i class="fa fa-info-circle"></i>
+                    </a>
+                    <button type="button" class="btn btn-sm btn-danger btnDelete" data-id="@item.CatId">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section script {
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '.btnDelete', function () {
+                var id = $(this).data("id");
+                if (confirm("Bạn có chắc chắn muốn xóa danh mục này?")) {
+                    $.ajax({
+                        url: '@Url.Action("Delete", "AdminCategories")',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (result) {
+                            if (result.success) {
+                                alert("Xóa danh mục thành công!");
+                                $("#row_" + id).fadeOut();
+                            } else {
+                                alert("Không thể xóa: " + result.message);
+                            }
+                        },
+                        error: function () {
+                            alert("Lỗi khi xóa danh mục.");
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
