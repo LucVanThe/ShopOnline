@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShopOnline.Models;
+using ShopOnline.Repository;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 
@@ -13,9 +14,13 @@ builder.Services.AddControllersWithViews()
 // 🔹 Lấy chuỗi kết nối
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+
 // 🔹 Đăng ký DbContext
 builder.Services.AddDbContext<WebBanhangDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.All }));
+builder.Services.AddScoped<ILoaiSpRepository, LoaiSpRepository>();
+builder.Services.AddSession();
+
 var app = builder.Build();
 
 
@@ -31,12 +36,19 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
-app.MapAreaControllerRoute(
+app.MapControllerRoute(
+    name: "productDetails",
+    pattern: "Home/ChiTietSanPham/{productId?}",
+    defaults: new { controller = "Home", action = "ChiTietSanPham" });
+app.MapControllerRoute(
     name: "areas",
-    areaName: "Admin",
-    pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Access}/{action=Login}/{id?}");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -1,0 +1,8 @@
+﻿@model IEnumerable<ShopOnline.Models.Category>
+@if (Model != null && Model.Any())
+{
+    foreach (var item in Model)
+    {
+        <li><a href="#">@item.CatName</a></li>
+    }
+}

@@ -27,7 +27,7 @@ namespace ShopOnline.Areas.Admin.Controllers
             ViewBag.CurrentFilter = searchString;
             if (!string.IsNullOrEmpty(searchString))
             {
-                product = product.Where(a => a.ProductName.Contains(searchString) );
+                product = product.Where(a => EF.Functions.Like(a.ProductName,$"%{searchString}%") || EF.Functions.Like(a.Cat.CatName, $"%{searchString}%"));
             }
             var pageNumber = page == null || page <= 0 ? 1 : page.Value;
             var pageSize = 15; // Số lượng bản ghi trên mỗi trang

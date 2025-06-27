@@ -12,10 +12,10 @@
     <a asp-action="Create" class="btn btn-primary">Thêm mới</a>
 </p>
 @using (Html.BeginForm("Index", "AdminProducts", FormMethod.Get))
-{
+{ 
     <div class="input-group input-group-sm mb-3">
        
-            @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Tìm tên hoặc email..." })
+            @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Tìm tên hoặc danh muc" })
       
         <div class="input-group-append">
             <button type="submit" class="btn btn-info">Tìm</button>

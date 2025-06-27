@@ -11,4 +11,5 @@ Add the following code to the Configure method in your Application's Startup cla
           );
         });
 Scaffold-DbContext "Server=DESKTOP-L07UI8K;Database=WebBanHangOnline;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models 
-Scaffold-DbContext "Server=DESKTOP-L07UI8K;Database=WebBanHangOnline;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models Force
+Scaffold-DbContext "Server=DESKTOP-L07UI8K;Database=WebBanHangOnline;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Force
+Scaffold-DbContext "Server=DESKTOP-L07UI8K;Database=WebBanHangOnline;Trusted_Connection=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context WebBanhangDbContext -Force
