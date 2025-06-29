@@ -16,7 +16,7 @@ namespace ShopOnline.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var sp = _context.Products
-                .Where(c => c.Active == true)
+                .Where(c => c.Active == true && c.Discount > 0)
                 .Select(c => new ProductViewModel
                 {
                     productId = c.ProductId,

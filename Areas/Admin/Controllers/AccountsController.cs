@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShopOnline.Models;
+using X.PagedList.Extensions;
 
 namespace ShopOnline.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "1")]
     public class AccountsController : Controller
     {
         private readonly WebBanhangDbContext _context;
@@ -20,16 +23,18 @@ namespace ShopOnline.Areas.Admin.Controllers
         }
        
         // GET: Admin/Accounts
-        public IActionResult Index(string searchString)
+        public IActionResult Index(string searchString, int? page)
         {
+            int pageSize = 10;
+            int pageNumber = page ?? 1;
             var accounts = _context.Accounts.Include(a => a.Role).AsQueryable();
             ViewBag.CurrentFilter = searchString;
             if (!string.IsNullOrEmpty(searchString))
             {
                 accounts = accounts.Where(a => a.FullName.Contains(searchString) || a.Email.Contains(searchString));
             }
-            
-            return View(accounts.ToList());
+            var tk = accounts.ToPagedList(pageNumber, pageSize);
+            return View(tk);
         }
 
         // GET: Admin/Accounts/Details/5
@@ -68,7 +73,7 @@ namespace ShopOnline.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 account.CreateDate = DateTime.Now;
-                
+                account.Password = BCrypt.Net.BCrypt.HashPassword(account.Password);
                 _context.Add(account);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

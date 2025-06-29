@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "DonHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<ShopOnline.Models.Order>
+
+<h2>Đơn hàng của tôi</h2>
+@foreach (var order in Model)
+{
+    <div class="order">
+        <h4>Đơn hàng #@order.OrderId - @order.OrderDate?.ToString("dd/MM/yyyy")</h4>
+        <ul>
+            @foreach (var item in order.OrderDetails)
+            {
+                <li>@item.ProductId - SL: @item.Quantity - Tổng: @item.Total?.ToString("N0") đ</li>
+            }
+        </ul>
+        <hr />
+    </div>
+}
+
+

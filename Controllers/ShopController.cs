@@ -2,19 +2,19 @@
 using Microsoft.EntityFrameworkCore;
 using ShopOnline.Models;
 using ShopOnline.ViewModel;
-
+using X.PagedList;
+using X.PagedList.Extensions;
 namespace ShopOnline.Controllers
 {
     public class ShopController : Controller
     {
         WebBanhangDbContext db = new WebBanhangDbContext();
-        public IActionResult Index()
+        public IActionResult Index(int? page, int CatId=0)
         {
-           
-            var listSP=db.Products
-                .Where(p => p.Active == true && p.Discount > 0)
-                .OrderByDescending(p => p.ProductId)
-                
+            int pageSize = 9;
+            int pageNumber = page ?? 1;
+            var listSP = db.Products
+                .Where(p => p.Active == true && (CatId==0 || p.CatId == CatId))
                 .Select(p => new ProductViewModel
                 {
                     productId = p.ProductId,
@@ -28,8 +28,9 @@ namespace ShopOnline.Controllers
                     quantity = p.UnitInStock,
                     productDiscount = p.Discount,
                     productPrice = p.Price,
-                }).ToList();
-            return View(listSP);
+                });
+            var sp = listSP.ToPagedList(pageNumber, pageSize);
+            return View(sp);
         }
     }
 }

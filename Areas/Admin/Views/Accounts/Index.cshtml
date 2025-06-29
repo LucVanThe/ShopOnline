@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ShopOnline.Models.Account>
+﻿@model X.PagedList.IPagedList<ShopOnline.Models.Account>
 @using X.PagedList.Mvc.Core
 @{
     ViewData["Title"] = "Quản lý tài khoản";
@@ -10,11 +10,6 @@
 <p>
     <a asp-action="Create" class="btn btn-primary">Thêm mới</a>
 </p>
-
-
-
-
-
 @using (Html.BeginForm("Index", "Accounts", FormMethod.Get))
 {
     <div class="input-group input-group-sm mb-3">
@@ -66,9 +61,55 @@
                 i++;
             }
         </tbody>
+       
     </table>
 }
 
+    <div class="custom-pagination">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+   {
+       LiElementClasses = new[] { "page-item" },
+       PageClasses = new[] { "page-link" },
+       UlElementClasses = new[] { "pagination", "justify-content-center" }
+   })
+
+
+    </div>
+
+
+<style>
+    .pagination {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        list-style: none;
+        padding-left: 0;
+        margin-top: 20px;
+    }
+
+    .page-item {
+        margin: 0 5px;
+    }
+
+    .page-link {
+        padding: 8px 14px;
+        font-size: 14px;
+        color: #007bff;
+        text-decoration: none;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+    }
+
+    .page-item.active .page-link {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+    }
+
+    .page-link:hover {
+        background-color: #e9ecef;
+    }
+</style>
 @section script{
     <script>
         $(document).ready(function () {

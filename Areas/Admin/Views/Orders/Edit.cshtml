@@ -1,0 +1,88 @@
+﻿@model ShopOnline.Models.Order
+
+@{
+    ViewData["Title"] = "Chỉnh sửa đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h2 class="mb-4" style="padding:20px">Chỉnh sửa đơn hàng</h2>
+<div style="padding:20px">
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="OrderId" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <!-- Thông tin khách hàng -->
+                <div class="form-group mb-3">
+                    <label class="form-label">Khách hàng</label>
+                    <input class="form-control" value="@Model.Customer?.FullName" readonly />
+                    <input type="hidden" asp-for="CustomerId" />
+                </div>
+
+            <!-- Ngày đặt & giao -->
+            <div class="form-group mb-3">
+                <label asp-for="OrderDate" class="form-label">Ngày đặt hàng</label>
+                <input asp-for="OrderDate" type="date" class="form-control" />
+                <span asp-validation-for="OrderDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="ShipDate" class="form-label">Ngày giao hàng</label>
+                <input asp-for="ShipDate" type="date" class="form-control" />
+                <span asp-validation-for="ShipDate" class="text-danger"></span>
+            </div>
+
+            <!-- Trạng thái giao dịch -->
+            <div class="form-group mb-3">
+                <label asp-for="TransactStatusId" class="form-label">Trạng thái</label>
+                <select asp-for="TransactStatusId" class="form-control" asp-items="ViewBag.TransactStatusId"></select>
+                <span asp-validation-for="TransactStatusId" class="text-danger"></span>
+            </div>
+
+            <!-- Trạng thái đơn hàng -->
+            <div class="form-check form-switch mb-3">
+                <input class="form-check-input" type="checkbox" asp-for="Deleted" />
+                <label class="form-check-label" asp-for="Deleted">Đã xóa</label>
+                <span asp-validation-for="Deleted" class="text-danger"></span>
+            </div>
+
+            <div class="form-check form-switch mb-3">
+                <input class="form-check-input" type="checkbox" asp-for="Paid" />
+                <label class="form-check-label" asp-for="Paid">Đã thanh toán</label>
+                <span asp-validation-for="Paid" class="text-danger"></span>
+            </div>
+
+            <!-- Thông tin thanh toán -->
+            <div class="form-group mb-3">
+                <label asp-for="PaymentDate" class="form-label">Ngày thanh toán</label>
+                <input asp-for="PaymentDate" type="date" class="form-control" />
+                <span asp-validation-for="PaymentDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="PaymentId" class="form-label">Phương thức thanh toán</label>
+                <input asp-for="PaymentId" class="form-control" />
+                <span asp-validation-for="PaymentId" class="text-danger"></span>
+            </div>
+
+            <!-- Ghi chú -->
+            <div class="form-group mb-4">
+                <label asp-for="Note" class="form-label">Ghi chú</label>
+                <textarea asp-for="Note" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+
+            <!-- Nút lưu -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                <a asp-action="Index" class="btn btn-secondary ml-2">Quay lại</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</div>

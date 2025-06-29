@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShopOnline.Models;
+using ShopOnline.Models.Authentication;
 using X.PagedList;
 
 namespace ShopOnline.Areas.Admin.Controllers
 {
+   
+   
     [Area("Admin")]
+    [Authorize(Roles = "1")]
     public class AdminProductsController : Controller
     {
         private readonly WebBanhangDbContext _context;
@@ -19,7 +24,7 @@ namespace ShopOnline.Areas.Admin.Controllers
         {
             _context = context;
         }
-
+       
         // GET: Admin/AdminProducts
         public IActionResult Index(string searchString, int? page)
         {
@@ -30,7 +35,7 @@ namespace ShopOnline.Areas.Admin.Controllers
                 product = product.Where(a => EF.Functions.Like(a.ProductName,$"%{searchString}%") || EF.Functions.Like(a.Cat.CatName, $"%{searchString}%"));
             }
             var pageNumber = page == null || page <= 0 ? 1 : page.Value;
-            var pageSize = 15; // Số lượng bản ghi trên mỗi trang
+            var pageSize = 10; // Số lượng bản ghi trên mỗi trang
             PagedList<Product> pagedProducts = new PagedList<Product>(product, pageNumber, pageSize);
             ViewBag.CurrentPage = pageNumber;
             return View(pagedProducts);

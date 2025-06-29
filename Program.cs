@@ -19,6 +19,14 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<WebBanhangDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.All }));
 builder.Services.AddScoped<ILoaiSpRepository, LoaiSpRepository>();
+builder.Services.AddAuthentication("MyCookieAuth")
+    .AddCookie("MyCookieAuth", options =>
+    {
+        options.LoginPath = "/Access/Login"; 
+        options.AccessDeniedPath = "/Access/AccessDenied"; // nếu cần
+    });
+
+builder.Services.AddAuthorization();
 builder.Services.AddSession();
 
 var app = builder.Build();
@@ -37,6 +45,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseSession();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllerRoute(
     name: "productDetails",

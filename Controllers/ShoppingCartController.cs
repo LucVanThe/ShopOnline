@@ -7,6 +7,11 @@ using ShopOnline.Extension;
 
 namespace ShopOnline.Controllers
 {
+    public class CartAjaxRequest
+    {
+        public int ProductId { get; set; }
+        public int Quantity { get; set; }
+    }
     public class ShoppingCartController : Controller
     {
         private readonly WebBanhangDbContext _context;
@@ -119,6 +124,7 @@ namespace ShopOnline.Controllers
                     ProductId = product.ProductId,
                     ProductName = product.ProductName,
                     ProductImage = product.Thumb,
+                    discount=product.Discount,
                     Quantity = model.Quantity,
                     Price = product.Price * (1 - (product.Discount / 100))
                 });
@@ -128,12 +134,46 @@ namespace ShopOnline.Controllers
 
             return Json(new { success = true, message = "Đã thêm vào giỏ hàng!" });
         }
-
-        public class CartAjaxRequest
+        [HttpPost]
+        public JsonResult UpdateCartAjax([FromBody] List<CartItemViewModel> model)
         {
-            public int ProductId { get; set; }
-            public int Quantity { get; set; }
+            var cart = HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart");
+            if (cart == null || !cart.Any())
+            {
+                return Json(new { success = false, message = "Giỏ hàng trống." });
+            }
+            foreach (var update in model)
+            {
+                var item = cart.FirstOrDefault(x => x.ProductId == update.ProductId);
+                if(item != null)
+                {
+                    if (update.Quantity <= 0)
+                    {
+                        cart.Remove(item); // Xóa sản phẩm nếu số lượng cập nhật là 0 hoặc âm
+                    }
+                    else
+                    {
+                        item.Quantity = update.Quantity; // Cập nhật số lượng sản phẩm
+                    }
+                }
+            }
+            HttpContext.Session.SetObject("Cart", cart);
+            return Json(new { success = true, message = "Giỏ hàng đã được cập nhật!" });
         }
+        [HttpPost]
+        public JsonResult RemoveFromCartAjax(int id)
+        {
+            var cart=HttpContext.Session.GetObject<List<CartItemViewModel>>("Cart") ?? new List<CartItemViewModel>();
+            var item = cart.FirstOrDefault(x => x.ProductId == id);
+            if (item != null)
+            {
+                cart.Remove(item);
+            }
+                HttpContext.Session.SetObject("Cart", cart);
+                return Json(new { success = true, message = "Sản phẩm đã được xóa khỏi giỏ hàng." });
+            
+        }
+
 
         //[HttpPost]
         //[Route("api/cart/remove")]

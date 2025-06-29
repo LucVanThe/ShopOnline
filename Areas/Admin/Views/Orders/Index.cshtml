@@ -1,0 +1,131 @@
+﻿@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<ShopOnline.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h2 class="mt-4 mb-3">Danh sách đơn hàng</h2>
+
+@* <p>
+    <a asp-action="Create" class="btn btn-success mb-3">+ Tạo đơn hàng mới</a>
+</p>
+ *@
+<table class="table table-bordered table-hover table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Order date</th>
+            <th>Ship date</th>
+            <th>Ghi chú</th>
+            <th>Khách hàng</th>
+            <th>Trạng thái</th>
+            <th>Trạng thái đơn hàng</th>
+            <th>Tổng tiền</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var total = item.OrderDetails.Sum(od => od.Total ?? 0);
+            <tr id="row_@item.OrderId">
+                <td>@item.OrderDate?.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@item.ShipDate?.ToString("dd/MM/yyyy")</td>
+                <td>@item.Note</td>
+                <td>
+                    @item.Customer?.FullName
+                    <br />
+                    <small class="text-muted">@item.Customer?.Email</small>
+                </td>
+                <td>
+                    @item.TransactStatus?.Status 
+                </td>
+                <td>
+                    @if (@item.Deleted)
+                    {
+                        <p class="btn btn-danger btn-sm">Đã xóa</p>
+                    }
+                    else
+                    {
+                        <p class="btn btn-info btn-sm">Tồn tại</p>
+                    }
+                </td>
+                <td>@total.ToString("N0") VND</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.OrderId" class="btn btn-info btn-sm">Chi tiết</a>
+                    <a asp-action="Edit" asp-route-id="@item.OrderId" class="btn btn-warning btn-sm">Sửa</a>
+                    <a data-id="@item.OrderId" class="btn btn-danger btn-sm btnDelete">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="custom-pagination">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+{
+    LiElementClasses = new[] { "page-item" },
+    PageClasses = new[] { "page-link" },
+    UlElementClasses = new[] { "pagination", "justify-content-center" }
+})
+</div>
+@section script{
+    <script>
+        $(document).ready(function(){
+            $('body').on('click','.btnDelete',function(){
+                var id=$(this).data('id');
+                if(confirm("Bạn có muốn xóa đơn hàng này không")){              
+                    $.ajax({
+                       url: '@Url.Action("Delete", "Orders")',
+                        type: 'POST',
+                        data: { id: id },
+                        
+                        success: function(rs){
+                            if(rs.success){
+                               location.reload();                            
+                            }else{
+                                alert("Xóa thất bại");
+                            }
+                        },
+                        error: function(){
+                            alert("Đã xảy ra lỗi");
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
+<style>
+    .pagination {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        list-style: none;
+        padding-left: 0;
+        margin-top: 20px;
+    }
+
+    .page-item {
+        margin: 0 5px;
+    }
+
+    .page-link {
+        padding: 8px 14px;
+        font-size: 14px;
+        color: #007bff;
+        text-decoration: none;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+    }
+
+    .page-item.active .page-link {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+    }
+
+    .page-link:hover {
+        background-color: #e9ecef;
+    }
+</style>

@@ -9,6 +9,7 @@ using System.Drawing.Printing;
 using Azure;
 using ShopOnline.ViewModel;
 using ShopOnline.Models.Authentication;
+using Microsoft.AspNetCore.Authorization;
 namespace ShopOnline.Controllers;
 
 public class HomeController : Controller

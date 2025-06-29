@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using X.PagedList;
 namespace ShopOnline.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "1")]
     public class AdminCustomersController : Controller
     {
         private readonly WebBanhangDbContext _context;
@@ -20,13 +22,16 @@ namespace ShopOnline.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminCustomers
-        public IActionResult Index(int? page)
+        public IActionResult Index(int? page, string searchString)
         {
             var pageNumber = page == null|| page <= 0 ? 1 : page.Value;
-            var pageSize = 15;
+            var pageSize = 10;
             var customers = _context.Customers
-                .OrderByDescending(c => c.CreateDate);
-               
+                .OrderByDescending(c => c.CreateDate).AsQueryable();
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                customers = customers.Where(a => a.FullName.Contains(searchString) || a.Email.Contains(searchString));
+            }
             PagedList<Customer> pagedCustomers = new PagedList<Customer>(customers, pageNumber, pageSize);
             ViewBag.CurrentPage = pageNumber;
             return View(pagedCustomers); 
