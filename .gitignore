@@ -24,7 +24,7 @@ obj/
 
 ## 👉 Cấu hình chuỗi kết nối (nên giữ riêng tư)
 appsettings.Development.json
-secrets.json
+
 
 ## 👉 Cấu hình môi trường
 .env
