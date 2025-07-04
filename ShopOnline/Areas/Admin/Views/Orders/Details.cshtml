@@ -1,0 +1,52 @@
+﻿@model ShopOnline.Models.Order
+
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h2 class="mb-4">Chi tiết đơn hàng</h2>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <dl class="row">
+
+            <dt class="col-sm-3">Khách hàng</dt>
+            <dd class="col-sm-9">@Model.Customer?.FullName (@Model.Customer?.CustomerId)</dd>
+
+            <dt class="col-sm-3">Ngày đặt hàng</dt>
+            <dd class="col-sm-9">@Model.OrderDate?.ToString("dd/MM/yyyy")</dd>
+
+            <dt class="col-sm-3">Ngày giao hàng</dt>
+            <dd class="col-sm-9">@Model.ShipDate?.ToString("dd/MM/yyyy")</dd>
+
+            <dt class="col-sm-3">Đã xóa</dt>
+            <dd class="col-sm-9">
+                @(Model.Deleted == true ? "✔ Có" : "✘ Không")
+            </dd>
+
+            <dt class="col-sm-3">Đã thanh toán</dt>
+            <dd class="col-sm-9">
+                @(Model.Paid == true ? "✔ Có" : "✘ Không")
+            </dd>
+
+            <dt class="col-sm-3">Ngày thanh toán</dt>
+            <dd class="col-sm-9">@Model.PaymentDate?.ToString("dd/MM/yyyy")</dd>
+
+            <dt class="col-sm-3">Phương thức thanh toán</dt>
+            <dd class="col-sm-9">@Model.PaymentId</dd>
+
+            <dt class="col-sm-3">Ghi chú</dt>
+            <dd class="col-sm-9">@Model.Note</dd>
+
+            <dt class="col-sm-3">Trạng thái giao dịch</dt>
+            <dd class="col-sm-9">@Model.TransactStatus?.Status (@Model.TransactStatus?.Status)</dd>
+
+        </dl>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a asp-action="Edit" asp-route-id="@Model.OrderId" class="btn btn-primary">Chỉnh sửa</a>
+    <a asp-action="Index" class="btn btn-secondary ml-2">Quay lại danh sách</a>
+</div>

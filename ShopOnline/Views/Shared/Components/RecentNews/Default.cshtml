@@ -1,0 +1,23 @@
+﻿@model IEnumerable<ShopOnline.Models.Page>
+@if(Model != null && Model.Any())
+{
+	foreach (var item in Model)
+	{
+        <a href="#" class="blog__sidebar__recent__item">
+            <div class="blog__sidebar__recent__item__pic" style="width:100px;height:100px">
+                <a asp-action="BlogDetail" asp-controller="Blog" asp-route-alias="@item.Alias" asp-route-id="@item.PageId">
+                    <img src="~/Images/Pages/@item.Thumb" alt="@item.Thumb">
+                </a>
+               
+            </div>
+            <div class="blog__sidebar__recent__item__text">
+                <a asp-action="BlogDetail" asp-controller="Blog" asp-route-alias="@item.Alias" asp-route-id="@item.PageId">
+                    <h6>@item.PageName<br />@item.Title</h6>
+                </a>
+				
+                 
+                <span>@item.CreatedDate</span>
+            </div>
+        </a>
+	}
+}

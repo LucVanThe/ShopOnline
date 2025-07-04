@@ -1,0 +1,161 @@
+﻿@model ShopOnline.ViewModel.ProductDetailViewModel
+@{
+    ViewData["Title"] = "ChiTietSanPham";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Vegetable’s Package</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Home</a>
+                            <a href="./index.html">Vegetables</a>
+                            <span>Vegetable’s Package</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Product Details Section Begin -->
+    <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__item">
+                            <img class="product__details__pic__item--large"
+                                src="@Url.Content("~/images/products/"+@Model.productImage)" alt="">
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__text">
+                    
+                        <h3 data-id="@Model.productId">@Model.productName</h3>
+                        <div class="product__details__rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                            <span>(18 reviews)</span>
+                        </div>
+                    <div class="product__details__price">
+						@string.Format("{0:N0} VND", Model.totalPrice)
+                    </div>
+                        <p>@Model.sortDescription</p>
+                        
+					@* @using (Html.BeginForm("AddToCart", "ShoppingCart", FormMethod.Post, new { @class = "form-inline" }))
+					{ *@
+                        <input type="hidden" name="productId" value="@Model.productId" />
+                        <div class="product__details__quantity">
+                            <div class="quantity">
+                                <div class="pro-qty">
+                                   @*  <input type="text" name="quantity" value="1"> *@
+                                    <input type="number" id="qty" value="1" min="1" />
+                                </div>
+                            </div>
+                        </div>
+                       @*  <button type="submit" class="primary-btn wcart">THÊM VÀO GIỎ</button> *@
+                        <button type="button" class="primary-btn wcart" onclick="addToCart(@Model.productId)">THÊM VÀO GIỎ</button>
+
+                        <div id="cart-message" class="text-success mt-2"></div>
+					
+                       @*  <a href="#" class="primary-btn wcart">THÊM VÀO GIỎ</a> *@
+                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <ul>
+                            <li><b>Trạng thái</b>
+                                <span>
+								@if (Model.quantity > 0)
+								{
+									<span class="text-success">Còn hàng</span>
+								}
+								else
+								{
+									<span class="text-danger">Hết hàng</span>
+								}                              
+                                </span></li>
+                            <li><b>Giao hàng</b> <span>01 Ngày <samp> Nhận hàng miễn phí</samp></span></li>
+                            <li><b>Đơn vị</b> <span>1 kg</span></li>
+                            <li><b>Chia sẻ</b>
+                                <div class="share">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                                    aria-selected="true">Mô tả</a>
+                            </li>
+                           
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <h6>Thông tin sản phẩm</h6>
+                                <p>@Html.Raw(Model.productDescription)</p>
+                                </div>
+                            </div>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Details Section End -->
+
+    <!-- Related Product Section Begin -->
+    <section class="related-product">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title related__product__title">
+                        <h2>Sản phẩm liên quan</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            @await Component.InvokeAsync("SPLienQuan", new { CatId = Model.catId, ProductId = Model.productId })
+                
+                
+            </div>
+        </div>
+    </section>
+    <!-- Related Product Section End -->
+@section Scripts {
+    <script>
+        function addToCart(productId) {
+            const quantity = document.getElementById("qty").value;
+
+            fetch('/ShoppingCart/AddToCartAjax', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() // nếu có anti-forgery
+                },
+                body: JSON.stringify({ productId, quantity })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("cart-message").innerText = data.message;
+                 alert(data.message || "Đã thêm vào giỏ hàng!");
+            });
+        }
+    </script>
+}

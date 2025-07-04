@@ -1,0 +1,15 @@
+﻿@model IEnumerable<ShopOnline.ViewModel.ProductViewModel>
+@foreach (var item in Model)
+{
+    <div class="latest-prdouct__slider__item">
+        <a href="#" class="latest-product__item">
+            <div class="latest-product__item__pic" style="width:150px;height:100px">
+                <img src="~/Images/Products/@item.productImage" alt="">
+            </div>
+            <div class="latest-product__item__text">
+                <h6>@item.productName</h6>
+                <span>@item.productPrice</span>
+            </div>
+        </a>      
+    </div>
+}

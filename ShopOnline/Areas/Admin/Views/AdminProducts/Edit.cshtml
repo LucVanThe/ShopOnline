@@ -1,0 +1,164 @@
+﻿@model ShopOnline.Models.Product
+
+@{
+    ViewData["Title"] = "Chỉnh sửa sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h1 class="mb-4">Chỉnh sửa sản phẩm</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit" enctype="multipart/form-data" class="border rounded p-4 shadow-sm bg-light">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <input type="hidden" asp-for="ProductId" />
+
+            <div class="mb-3">
+                <label asp-for="ProductName" class="form-label">Tên sản phẩm</label>
+                <input asp-for="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ShortDesc" class="form-label">Mô tả ngắn</label>
+                <input asp-for="ShortDesc" class="form-control" />
+                <span asp-validation-for="ShortDesc" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">Mô tả</label>
+                @Html.TextAreaFor(x => x.Description, new { @class = "form-control", @placeholder = "Mô tả", @id = "txtDetail" })
+                @Html.ValidationMessageFor(x => x.Description, null, new { @class = "text-danger" })
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="CatId" class="form-label"></label>
+                    <select asp-for="CatId" class="form-select" asp-items="ViewBag.CatId">
+                        <option value="">-- Chọn danh mục --</option>
+                    </select>
+                    <span asp-validation-for="CatId" class="text-danger"></span>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label asp-for="Price" class="form-label">Giá</label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label asp-for="Discount" class="form-label">Giảm giá</label>
+                    <input asp-for="Discount" class="form-control" />
+                    <span asp-validation-for="Discount" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group mb-3">
+                    <label asp-for="DateCreated" class="form-label">Ngay tao</label>
+                    <input asp-for="DateCreated" class="form-control" type="datetime-local" />
+                    <span asp-validation-for="DateCreated" class="text-danger small"></span>
+                </div>              
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Ảnh đại diện hiện tại</label><br />
+                @if (!string.IsNullOrEmpty(Model.Thumb))
+                {
+                    <img src="~/Images/Products/@Model.Thumb" alt="Avatar" width="100" class="img-thumbnail mb-2" />
+                }
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Thumb" class="form-label">Ảnh đại diện</label>
+                <input type="file" name="Avatar" class="form-control" accept="image/*" />
+                <img id="previewAvatar" class="img-thumbnail mt-2" style="display:none;" width="100" />
+            </div>
+
+           
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label asp-for="BestSellers" class="form-label">Ban chay</label>
+                    @Html.DropDownListFor(model => model.BestSellers,
+                             new List<SelectListItem>
+                    {
+                    new SelectListItem { Text = "Hoạt động", Value = "true" },
+                    new SelectListItem { Text = "Bị khóa", Value = "false" }
+                    },
+                             htmlAttributes: new { @class = "form-control" })
+                    <span asp-validation-for="BestSellers" class="text-danger small"></span>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="HomeFlag" class="form-label"></label>
+                  @Html.DropDownListFor(model => model.HomeFlag,
+                    new List<SelectListItem>
+                    {
+                    new SelectListItem { Text = "Hoạt động", Value = "true" },
+                    new SelectListItem { Text = "Bị khóa", Value = "false" }
+                    },
+                    htmlAttributes: new { @class = "form-control" })
+                    <span asp-validation-for="HomeFlag" class="text-danger small"></span>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="Active" class="form-label"></label>
+                    @Html.DropDownListFor(model => model.Active,
+                             new List<SelectListItem>
+                    {
+                    new SelectListItem { Text = "Hoạt động", Value = "true" },
+                    new SelectListItem { Text = "Bị khóa", Value = "false" }
+                    },
+                             htmlAttributes: new { @class = "form-control" })
+                    <span asp-validation-for="Active" class="text-danger small"></span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Tags" class="form-label"></label>
+                <input asp-for="Tags" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+            <label asp-for="UnitInStock" class="form-label">Số lượng</label>
+            <input asp-for="UnitInStock" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MetaDesc" class="form-label"></label>
+                <input asp-for="MetaDesc" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MetaKey" class="form-label"></label>
+                <input asp-for="MetaKey" class="form-control" />
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+                <input type="submit" value="Lưu thay đổi" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+@section script {
+    <script>
+        document.querySelector('input[type="file"][name="Avatar"]').addEventListener('change', function (e) {
+            const [file] = e.target.files;
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const preview = document.getElementById("previewAvatar");
+                    preview.src = e.target.result;
+                    preview.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        $(document).ready(function () {
+            CKEDITOR.replace('txtDetail', {
+                customConfig: '/content/ckeditor/config.js',
+                extraAllowedContent: 'span',
+            });
+        });
+    </script>
+}

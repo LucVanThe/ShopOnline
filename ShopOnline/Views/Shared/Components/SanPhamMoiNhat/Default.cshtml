@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ShopOnline.ViewModel.ProductViewModel>
+<div class="row">
+
+	@foreach (var item in Model)
+	{
+		<div class="col-lg-4 col-md-6 col-sm-6">
+			<div class="product__item">
+				<div class="product__item__pic set-bg" style="width:100%;height:200px">
+					<a asp-controller="Home" asp-action="ChiTietSanPham" asp-route-id="@item.productId">
+						<img src="@Url.Content("~/Images/Products/" + item.productImage)" alt="@item.productName" class="product-image" />
+					</a>
+					
+					<ul class="product__item__pic__hover">
+						<li><a href="#"><i class="fa fa-heart"></i></a></li>
+						<li><a href="#"><i class="fa fa-retweet"></i></a></li>
+						<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+					</ul>
+				</div>
+				<div class="product__item__text">
+					<h6>
+						<a asp-controller="Home" asp-action="ChiTietSanPham" asp-route-id="@item.productId">@item.productName</a>
+					</h6>
+					<h5>@item.productPrice?.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("vi-VN"))</h5>
+				</div>
+			</div>
+		</div>
+	}
+</div>

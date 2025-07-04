@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ShopOnline.Models.Product>
+@if(Model !=null && Model.Any())
+{
+    foreach (var item in Model)
+    {
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="product__item">
+                <div class="product__item__pic set-bg product-image">
+                    <img class="product-image" src="@Url.Content("~/images/products/" + item.Thumb)" alt="@item.ProductName" />
+                    <ul class="product__item__pic__hover">
+                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+                </div>
+                <div class="product__item__text">
+                    <h6>
+                        <a asp-controller="Home" asp-action="ChiTietSanPham" asp-route-id="@item.ProductId">@item.ProductName</a>
+                    </h6>
+                    <h5> @string.Format("{0:N0} VND", item.Price * (1 - (item.Discount / 100)))</h5>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>Chưa có sản phẩm liên quan</p>
+}
+
+<style>
+    .product-image {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+    }
+</style>

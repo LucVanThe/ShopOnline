@@ -1,0 +1,9 @@
+﻿@model IEnumerable<ShopOnline.Models.Category>
+@if (Model != null && Model.Any())
+{
+    <li><a href="@Url.Action("Index","Shop", new{ CatId=0})">Tất cả</a></li>
+    foreach (var item in Model)
+    {
+        <li><a href="@Url.Action("Index","Shop", new{ CatId=item.CatId})">@item.CatName</a></li>
+    }
+}

@@ -1,0 +1,49 @@
+﻿@model ShopOnline.Models.Customer
+@{
+    ViewData["Title"] = "Chi tiết khách hàng";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h1 class="mb-4">Chi tiết khách hàng</h1>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <div class="row mb-4">
+            <div class="col-md-3 text-center">
+                <img src="~/Images/Customers/@Model.Avatar" class="img-thumbnail" width="150" alt="Avatar" />
+            </div>
+            <div class="col-md-9">
+               
+                <div class="row row-cols-1 row-cols-md-2 g-2">
+                    <h5 class="card-title mb-3">@Model.FullName</h5>
+                    <div><strong>Ngày sinh:</strong> @Model.Birthday?.ToString("dd/MM/yyyy")</div>
+                    <div><strong>Địa chỉ:</strong> @Model.Address</div>
+                    <div><strong>Email:</strong> @Model.Email</div>
+                    <div><strong>SĐT:</strong> @Model.Phone</div>
+                    <div><strong>Khu vực:</strong> @Model.LocationId - @Model.District - @Model.Ward</div>
+                    <div><strong>Ngày tạo:</strong> @Model.CreateDate?.ToString("dd/MM/yyyy HH:mm")</div>
+                    <div><strong>Lần đăng nhập cuối:</strong> @Model.LastLogin?.ToString("dd/MM/yyyy HH:mm")</div>
+                    <div>
+                        <strong>Trạng thái:</strong>
+                        @if (Model.Active==true)
+                        {
+                            <span class="badge bg-success">Hoạt động</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Bị khóa</span>
+                        }
+                    </div>
+                    <div><strong>Password:</strong> @Model.Password</div>
+                    <div><strong>Salt:</strong> @Model.Salt</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <a asp-action="Edit" asp-route-id="@Model.CustomerId" class="btn btn-primary">Chỉnh sửa</a>
+            <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+        </div>
+    </div>
+</div>
+

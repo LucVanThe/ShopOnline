@@ -1,0 +1,103 @@
+﻿@model ShopOnline.Models.Product
+
+@{
+    ViewData["Title"] = "Chi tiết sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h1 class="mb-4">Chi tiết sản phẩm</h1>
+
+<div class="card shadow-sm p-4 bg-light">
+    <h4 class="mb-3">@Model.ProductName</h4>
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <img src="~/Images/Products/@Model.Thumb" alt="@Model.ProductName" class="img-fluid rounded border" style="max-height: 250px;" />
+        </div>
+        <div class="col-md-8">
+            <dl class="row">
+                <dt class="col-sm-4">Mô tả ngắn</dt>
+                <dd class="col-sm-8">@Model.ShortDesc</dd>
+
+                <dt class="col-sm-4">Mô tả chi tiết</dt>
+                <dd class="col-sm-8">@Model.Description</dd>
+
+                <dt class="col-sm-4">Giá</dt>
+                <dd class="col-sm-8">@Model.Price?.ToString("N0") ₫</dd>
+
+                <dt class="col-sm-4">Giảm giá (%)</dt>
+                <dd class="col-sm-8">@Model.Discount</dd>
+
+                <dt class="col-sm-4">Video</dt>
+                <dd class="col-sm-8">@Model.Video</dd>
+
+                <dt class="col-sm-4">Ngày tạo</dt>
+                <dd class="col-sm-8">@Model.DateCreated?.ToString("dd/MM/yyyy")</dd>
+
+                <dt class="col-sm-4">Ngày cập nhật</dt>
+                <dd class="col-sm-8">@Model.DateModified?.ToString("dd/MM/yyyy")</dd>
+
+                <dt class="col-sm-4">Bán chạy</dt>
+                <dd class="col-sm-8">
+                    @if (Model.BestSellers == true)
+                    {
+                        <div>Có</div>
+                    }
+                    else
+                    {
+                        <div>Không</div>
+                    }
+                </dd>
+
+                <dt class="col-sm-4">Trang chủ</dt>
+                <dd class="col-sm-8">
+                    @if (Model.HomeFlag == true)
+                    {
+                        <div>Hiển thị</div>
+                    }
+                    else
+                    {
+                        <div>Ẩn</div>
+                    }
+                </dd>
+
+                <dt class="col-sm-4">Đang bán</dt>
+                <dd class="col-sm-8">
+                    @if (Model.Active == true)
+                    {
+                        <div>Còn hàng</div>
+                    }
+                    else
+                    {
+                        <div>Ngưng bán</div>
+                    }
+                </dd>
+
+                <dt class="col-sm-4">Thẻ (Tags)</dt>
+                <dd class="col-sm-8">@Model.Tags</dd>
+
+                <dt class="col-sm-4">Tiêu đề</dt>
+                <dd class="col-sm-8">@Model.Title</dd>
+
+                <dt class="col-sm-4">Alias</dt>
+                <dd class="col-sm-8">@Model.Alias</dd>
+
+                <dt class="col-sm-4">Meta Desc</dt>
+                <dd class="col-sm-8">@Model.MetaDesc</dd>
+
+                <dt class="col-sm-4">Meta Key</dt>
+                <dd class="col-sm-8">@Model.MetaKey</dd>
+
+                <dt class="col-sm-4">Tồn kho</dt>
+                <dd class="col-sm-8">@Model.UnitInStock</dd>
+
+                <dt class="col-sm-4">Danh mục</dt>
+                <dd class="col-sm-8">@Model.Cat?.CatName (@Model.Cat?.CatId)</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="mt-4 d-flex justify-content-between">
+        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+        <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-primary">Chỉnh sửa</a>
+    </div>
+</div>

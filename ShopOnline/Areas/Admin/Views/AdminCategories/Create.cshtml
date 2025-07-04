@@ -1,0 +1,121 @@
+﻿@model ShopOnline.Models.Category
+
+@{
+    ViewData["Title"] = "Thêm danh mục";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h2 class="mb-4">Thêm mới danh mục</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Create" enctype="multipart/form-data" class="border rounded p-4 shadow-sm bg-light">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="CatName" class="form-label"></label>
+                <input asp-for="CatName" class="form-control" />
+                <span asp-validation-for="CatName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="ParentId" class="form-label"></label>
+                    <input asp-for="ParentId" class="form-control" />
+                    <span asp-validation-for="ParentId" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Levels" class="form-label"></label>
+                    <input asp-for="Levels" class="form-control" />
+                    <span asp-validation-for="Levels" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Ordering" class="form-label"></label>
+                    <input asp-for="Ordering" class="form-control" />
+                    <span asp-validation-for="Ordering" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Published" class="form-label"></label>
+                    @Html.DropDownListFor(model => model.Published,
+                             new List<SelectListItem>
+                    {
+                    new SelectListItem { Text = "Hoạt động", Value = "true" },
+                    new SelectListItem { Text = "Bị khóa", Value = "false" }
+                    },
+                             htmlAttributes: new { @class = "form-control" })
+                    <span asp-validation-for="Published" class="text-danger small"></span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Thumb" class="form-label">Ảnh đại diện</label>
+                <input type="file" name="Avatar" class="form-control" accept="image/*" />
+                <img id="previewAvatar" class="img-thumbnail mt-2" style="display:none;" width="100" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+          
+
+            <div class="mb-3">
+                <label asp-for="MetaDesc" class="form-label"></label>
+                <input asp-for="MetaDesc" class="form-control" />
+                <span asp-validation-for="MetaDesc" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MetaKey" class="form-label"></label>
+                <input asp-for="MetaKey" class="form-control" />
+                <span asp-validation-for="MetaKey" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Cover" class="form-label"></label>
+                    <input asp-for="Cover" class="form-control" />
+                    <span asp-validation-for="Cover" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="SchemaMarkup" class="form-label"></label>
+                    <input asp-for="SchemaMarkup" class="form-control" />
+                    <span asp-validation-for="SchemaMarkup" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+                <input type="submit" value="Tạo danh mục" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section script {
+    <script>
+        document.querySelector('input[type="file"][name="Avatar"]').addEventListener('change', function (e) {
+            const [file] = e.target.files;
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const preview = document.getElementById("previewAvatar");
+                    preview.src = e.target.result;
+                    preview.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+}

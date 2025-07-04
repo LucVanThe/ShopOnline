@@ -1,0 +1,14 @@
+﻿@model IEnumerable<ShopOnline.Models.Category>
+@if(Model !=null && Model.Any())
+{
+	foreach (var item in Model)
+	{
+        <div class="col-lg-3">
+            <div class="categories__item set-bg" data-setbg="@Url.Content("~/images/category/"+@item.Thumb)"
+                 style="background-image: url('@Url.Content("~/images/category/"+@item.Thumb)')">
+                <h5><a href="@Url.Action("Index","Shop")">@item.CatName</a></h5>
+            </div>
+        </div>
+	}
+}
+

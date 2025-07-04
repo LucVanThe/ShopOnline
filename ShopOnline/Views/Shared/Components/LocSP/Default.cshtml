@@ -1,0 +1,45 @@
+﻿@using X.PagedList.Mvc.Core;
+@* @model X.PagedList.IPagedList<ShopOnline.ViewModel.ProductViewModel> *@
+    @model IEnumerable<ShopOnline.ViewModel.ProductViewModel>      
+	@foreach (var item in Model)
+	{
+        <div class="col-lg-4">
+            <div class="product__discount__item  ">
+                <div class="product__discount__item__pic set-bg product-image">
+                    <a asp-controller="Home" asp-action="ChiTietSanPham" asp-route-id="@item.productId">
+                        <img src="@Url.Content("~/Images/Products/" + item.productImage)" alt="@item.productName" class="product-image" />
+                    </a>
+
+                    <div class="product__discount__percent">-@item.productDiscount %</div>
+                    <ul class="product__item__pic__hover">
+                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                    <li><a href="javascript:void(0);" onclick="addToCartAjax(@item.productId)"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+                </div>
+                <div class="product__discount__item__text">
+                    <span>@item.CatName</span>
+                    <h5> <a asp-controller="Home" asp-action="ChiTietSanPham" asp-route-id="@item.productId">@item.productName</a></h5>
+                    <div class="product__item__price">@item.totalPrice đ<span>@item.productPrice đ</span></div>
+                </div>
+            </div>
+        </div>
+	}    
+
+
+
+@* <div class="product__pagination">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+            new PagedListRenderOptions
+    {
+        DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+        DisplayLinkToLastPage = PagedListDisplayMode.Always,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+        DisplayLinkToNextPage = PagedListDisplayMode.Always,
+        MaximumPageNumbersToDisplay = 5,
+        UlElementClasses = new[] { "pagination", "justify-content-center" },
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link" }
+    })
+
+</div> *@

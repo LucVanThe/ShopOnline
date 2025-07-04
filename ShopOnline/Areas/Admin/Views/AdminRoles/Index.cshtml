@@ -1,0 +1,101 @@
+﻿@model IEnumerable<ShopOnline.Models.Role>
+@{
+    ViewData["Title"] = "Roles";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Quan ly quyen truy cap</h3>
+
+                <div class="card-tools ">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default">
+                                <i class="fas fa-search"></i>
+                            </button>
+
+
+                        </div>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <a class="btn btn-primary" href="@Url.Action("Create","AdminRoles",  new { area = "Admin" })">Them moi</a>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ten</th>
+                            <th>Mo ta</th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr id="trow_@item.RoleId">
+                                    <td>@item.RoleId</td>
+                                    <td>@item.RoleName</td>
+                                    <td>@item.Description</td>
+                                    <td>
+                                        <a class="btn btn-primary" href="@Url.Action("Edit","AdminRoles", new{ area="Admin",id=item.RoleId})">Sua</a>
+                                        <a class="btn btn-danger " id="btnDelete" data-id="@item.RoleId" href="#">Xoa</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="4">No roles found.</td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+@section script {
+    <script>
+        $(document).ready(function () {
+            $('body').on('click','#btnDelete',function () {
+                var id = $(this).data('id');
+                if (confirm('Ban co chac chan muon xoa quyen nay khong?')) {
+                    $.ajax({
+                        url: '@Url.Action("Delete", "AdminRoles", new { area = "Admin" })',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (response) {
+                            if (response.success) {
+                                alert('Xoa thanh cong');
+                                $('#' + id).remove(); // Remove the row from the table
+                                location.reload();
+                            } else {
+                                alert('Xoa that bai: ' + response.message);
+                            }
+                        },
+                        error: function () {
+                            alert('Loi xay ra trong qua trinh xoa');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

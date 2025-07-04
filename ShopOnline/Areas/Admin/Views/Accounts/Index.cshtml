@@ -1,0 +1,144 @@
+﻿@model X.PagedList.IPagedList<ShopOnline.Models.Account>
+@using X.PagedList.Mvc.Core
+@{
+    ViewData["Title"] = "Quản lý tài khoản";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h1>Quản lý tài khoản</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Thêm mới</a>
+</p>
+@using (Html.BeginForm("Index", "Accounts", FormMethod.Get))
+{
+    <div class="input-group input-group-sm mb-3">
+        @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Tìm tên hoặc email..." })
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-info">Tìm</button>
+        </div>
+    </div>
+}
+@if(Model !=null && Model.Any()){
+    var i = 1;
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>STT</th>
+                <th>Full name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Quyền</th>
+                <th>Trạng thái</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="row_@item.AccountId">
+                    <td>@i</td>
+                    <td>@item.FullName</td>
+                    <td>@item.Email</td>
+                    <td>@item.Phone</td>
+                    <td>@item.Role?.Description</td>
+                    <td>
+                        @if (item.Active == true)
+                        {
+                            <span class="badge bg-success">Hoạt động</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Bị khóa</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.AccountId" class="btn btn-sm btn-primary">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.AccountId" class="btn btn-sm btn-info">Details</a>
+                        <a data-id="@item.AccountId" class="btn btn-sm btn-danger btnDelete">Delete</a>
+                    </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+       
+    </table>
+}
+
+    <div class="custom-pagination">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+   {
+       LiElementClasses = new[] { "page-item" },
+       PageClasses = new[] { "page-link" },
+       UlElementClasses = new[] { "pagination", "justify-content-center" }
+   })
+
+
+    </div>
+
+
+<style>
+    .pagination {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        list-style: none;
+        padding-left: 0;
+        margin-top: 20px;
+    }
+
+    .page-item {
+        margin: 0 5px;
+    }
+
+    .page-link {
+        padding: 8px 14px;
+        font-size: 14px;
+        color: #007bff;
+        text-decoration: none;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+    }
+
+    .page-item.active .page-link {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+    }
+
+    .page-link:hover {
+        background-color: #e9ecef;
+    }
+</style>
+@section script{
+    <script>
+        $(document).ready(function () {
+          $('body').on('click', '.btnDelete', function () {
+                var id = $(this).data("id");
+                if (confirm("Bạn có chắc chắn muốn xóa tài khoản này?")) {
+                   
+                    $.ajax({
+                        url: '@Url.Action("Delete", "Accounts")',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (result) {
+                            if (result.success) {
+                                alert("Xóa tài khoản thành công!");
+                                $("#row_"+id).remove();
+                                location.reload();
+                            } else {
+                                alert("Xóa tài khoản thất bại: " + result.message);
+                            }
+                        },
+                        error: function () {
+                            alert("Đã xảy ra lỗi khi xóa tài khoản.");
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
+
+
+
