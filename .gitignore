@@ -1,48 +1,55 @@
-## 👉 Bỏ qua các thư mục biên dịch và tạm thời
+## 🛠 Thư mục build output
 bin/
 obj/
-*.dll
-*.exe
-*.log
-*.pdb
-*.cache
 
-## 👉 Visual Studio và Rider
-.vs/
+## 🔧 File tạm và debug
+*.log
+*.tlog
+*.vspscc
+*.vssscc
+*.dbmdl
 *.user
 *.suo
+*.userosscache
+*.sln.docstates
 
-
-
-## 👉 Cấu hình cá nhân
-*.dbmdl
-*.bak
-*.mdf
-*.ldf
-*.sqlite
-*.sql
-
-## 👉 Cấu hình chuỗi kết nối (nên giữ riêng tư)
+## 🔐 Secrets và cấu hình cục bộ
 appsettings.Development.json
-
-
-## 👉 Cấu hình môi trường
-.env
+secrets.json
+*.env
 .env.*
 
-## 👉 Thư mục phát sinh IDE
+## 🧠 IDE và cấu hình cá nhân
+.vs/
 .idea/
 *.iml
 
-## 👉 Thư mục phát sinh khi publish
+
+
+## 🌐 Web tài nguyên build
+wwwroot/dist/
+wwwroot/node_modules/
+node_modules/
+
+## ⚙️ Publish
 publish/
 *.Publish.xml
 
-## 👉 Git
+## 🖼 File hệ thống
+Thumbs.db
+desktop.ini
+.DS_Store
+
+## 🔁 Git merge
 *.orig
 *.rej
 
-## 👉 Các file hệ thống
-Thumbs.db
-desktop.ini
+## 💬 Thêm nếu dùng Rider/JetBrains
+.idea/
+*.sln.iml
 
+## 🧪 Test kết quả
+TestResults/
+*.coverage
+*.coveragexml
+*.testsettings
